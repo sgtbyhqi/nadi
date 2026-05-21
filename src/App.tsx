@@ -6,7 +6,6 @@ import {
   CalendarDays,
   CheckCircle2,
   Eye,
-  Gift,
   Heart,
   Image as ImageIcon,
   Lock,
@@ -923,27 +922,24 @@ function AdminPanel({
         </header>
 
         <div className="p-5 md:p-8">
-          {active === "Dashboard" && (
-            <div className="grid gap-4 md:grid-cols-4">
-              {[
-                ["Total Tamu", stats.guests, Users],
-                ["Hadir", stats.hadir, CheckCircle2],
-                ["Tidak Hadir", stats.tidak, X],
-                ["Ucapan", stats.wishes, MessageCircle],
-              ].map(([label, value, Icon]) => {
-                const DashboardIcon = Icon as React.ElementType;
-                return (
-                  <Card key={String(label)} className="rounded-3xl border-sky-100 bg-white shadow-sm shadow-sky-100">
-                    <CardContent className="p-6">
-                      <DashboardIcon className="mb-4 h-7 w-7 text-sky-500" />
-                      <p className="text-sm text-slate-500">{label}</p>
-                      <h3 className="mt-1 text-3xl font-bold text-slate-800">{value}</h3>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
+         {active === "Dashboard" && (
+  <div className="grid gap-4 md:grid-cols-4">
+    {[
+      { label: "Total Tamu", value: stats.guests, Icon: Users },
+      { label: "Total RSVP", value: stats.rsvp, Icon: CheckCircle2 },
+      { label: "Hadir", value: stats.hadir, Icon: Heart },
+      { label: "Ucapan", value: stats.wishes, Icon: MessageCircle },
+    ].map(({ label, value, Icon }) => (
+      <Card key={label}>
+        <CardContent className="p-6">
+          <Icon className="mb-4 h-7 w-7 text-[#7B1F1B]" />
+          <p className="text-sm text-slate-500">{label}</p>
+          <h3 className="mt-1 text-3xl font-bold text-slate-800">{value}</h3>
+        </CardContent>
+      </Card>
+    ))}
+  </div>
+)}
 
           {active === "Acara" && (
             <Card className="rounded-3xl border-sky-100 bg-white shadow-sm shadow-sky-100">
